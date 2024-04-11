@@ -2,20 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 :root {
+  --color-text-light: #070707;
+  --color-text-dark: #e3e3dd;
+  --color-background-light: white;
+  --color-background-dark: black;
+  --color-text: #070707;
+  --color-background: #efedea;
+
+  --color-navbar: rgb(37 99 235);
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 500;
 
-  color-scheme: dark light ;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark light;
+ 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body {
+  color: var(--color-text-dark);
+  background-color: var(--color-background-dark);
+}
 
+/* Estilo para el tema claro */
+body.theme-light {
+  color: var(--color-text-light);
+  background-color: var(--color-background-light);
+}
 * {
   box-sizing: border-box;
   position: relative;
@@ -24,3 +40,11 @@
 html {
   min-height: 100dvh;
 }
+
+
+
+
+
+
+
+

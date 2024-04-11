@@ -14,7 +14,7 @@ export const userStore = create(
     country: null,
     AuthToken: null,
     AUTH: false,
-    login: async (email, password) => {
+    login: async (email, password, navigate) => {
       const { IP, city, country } = get()
       const dataToSend = new FormData()
       dataToSend.append('identifier', email)
@@ -25,6 +25,7 @@ export const userStore = create(
 
       try {
         const { data } = await axios.post('auth/login', dataToSend)
+        console.log({ login: data })
         if (!data.status) {
           throw new ServerError(data.message)
         }
@@ -53,19 +54,20 @@ export const userStore = create(
             area: data.data.area,
           },
         }))
+        navigate('/')
       } catch (error) {
         console.error('Error during login:', error)
       }
     },
-    registerUser: async (userName, email, password, area) => {
+    registerUser: async (userName, email, password) => {
       const dataToSend = new FormData()
       dataToSend.append('name', userName)
       dataToSend.append('email', email)
       dataToSend.append('password', password)
-      dataToSend.append('area', area)
 
       try {
         const { data } = await axios.post('auth/register', dataToSend)
+        console.log({ registerUser: data })
         if (!data.status) {
           throw new ServerError(data.message)
         }
@@ -94,8 +96,14 @@ export const userStore = create(
         })
       }
     },
+    logOut: (navigate) => {
+      localStorage.removeItem('logedUser')
+      set({
+        AUTH: false,
+      })
+      navigate('/')
+    },
     getIP: async () => {
-      console.log('obtenemos ip?')
       try {
         const response = await fetch('https://ipapi.co/json/')
         const data = await response.json()

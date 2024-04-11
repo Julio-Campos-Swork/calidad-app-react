@@ -27,7 +27,7 @@ export const Footer = () => {
   }, [])
 
   return (
-    <div className="bg-blue-600">
+    <div className="bg-blue-600 sticky">
       <footer className="text-center py-2 text-light-blue-200">
         <p className="pt-2 pb-2">{date}</p>
       </footer>
